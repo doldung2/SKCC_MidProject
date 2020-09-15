@@ -1,12 +1,14 @@
 # IntensiveCource Mid Project Report(Team2)
 ## 1. Map of restaurants across the United States
 ### 1.1 SQL
-'''
+<pre>
+<code>
 select name,
        latitude,
        longitude
 from team2_business;
-'''
+</code>
+</pre>
 
 ### 1.2 Map
 <img src=./images/mid_01.png>
