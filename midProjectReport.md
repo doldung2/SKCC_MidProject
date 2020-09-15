@@ -15,7 +15,8 @@ from team2_business;
 
 ## 2. Which cities have the highest number of restaurants?
 ### 2.1 SQL
-'''
+<pre>
+<code>
 %sql
 with topcity_df (
 select city, 
@@ -28,7 +29,8 @@ where category = "Restaurants"
 group by city 
 order by count(*) desc 
 limit 10
-'''
+</code>
+</pre>
 
 ### 2.2 Data
 <img src=./images/mid_02_01.png>
@@ -40,7 +42,8 @@ limit 10
 
 ## 3. Which are the top 15 subcategories in Restaurants?
 ### 3.1 SQL
-'''
+<pre>
+<code>
 %sql
 with category_df (
 select explode(categories) as category 
@@ -54,7 +57,8 @@ where category != "Restaurants"
 group by category 
 order by count(*) desc 
 limit 15
-'''
+</code>
+</pre>
 
 ### 3.2 Data
 <img src=./images/mid_03_01.png>
