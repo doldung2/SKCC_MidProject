@@ -132,7 +132,13 @@ select team2_review.stars
 ## 6. Which type of restaurants get good reviews? How about bad reviews? This will depend on what you consider a good rating. Above 4 star perhaps? You choose. Similarly, for bad reviews. What would be considered a bad review?
 
 ### star를 기준으로 추출할 경우 상위/하위의 star가 불균형 적이어서 다른 방법을 찾기로 결정.
-### 최종 선정한 하위 카테고리의 개수가 148개이고, 이에 대한 10%에 해당하는 15개를 기준으로 상위 15개를 좋은 유형, 하위 15개를 하위 유형으로 함.
+### 하위 카테고리별도로 설정(148개) 후 10%에 해당하는 15개를 기준으로 상위 15개를 좋은 유형, 하위 15개를 하위 유형으로 선정.
+<pre>
+<code>
+하위 카테고리 참고 사이트
+https://blog.yelp.com/2018/01/yelp_category_list#section21
+</code>
+</pre>
 
 ### 6.1 Which type of restaurants get good reviews?
 #### 6.1.1 SQL
