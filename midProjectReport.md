@@ -297,7 +297,8 @@ group by isEliteUser
 #### 8.2.3 Chart
 <img src=./images/mid_08_04.png>
 
-### 각 business_Id별 elite와 non-elite간의 차이는 단순 차이보다 클거라는 가정으로 추가로 분석을 해본 결과 21%(0.21)로 단순 비교한 결과 8%(0.08)보다 큰 차이가 나는 것을 확인 할 수 있었습니다.
+#### 8.2.4 추가확인
+#### 각 business_Id별 elite와 non-elite간의 차이는 단순 차이보다 클거라는 가정으로 추가로 분석을 해본 결과 21%(0.21)로 단순 비교한 결과 8%(0.08)보다 큰 차이가 나는 것을 확인 할 수 있었습니다.
 #### SQL
 <pre>
 <code>
@@ -309,7 +310,6 @@ select case when size(team2_user.elite) > 0 then 'elite' else 'non-elite' end as
 from team2_user
 join team2_review
 on team2_user.user_id = team2_review.user_id 
---group by isEliteUser ,business_Id
 ), bb as (
 select isEliteUser
       ,business_Id
@@ -333,3 +333,114 @@ where  bb.business_Id = cc.business_Id
 </pre>
 
 
+
+## 조 과제
+### 1. 착한 유저, 나쁜 유저 식별
+### 리뷰 수가 10개 이상인 유저 그룹에서 유저별 별점 수를 식별.
+
+### 주요 불만 고객 식별
+
+#### SQL
+<pre>
+<code>
+%sql
+
+select team2_user.user_id
+     , avg(stars) as average_rating
+     , count(*) as review_cnt
+  from team2_review
+  join team2_user
+    on team2_review.user_id = team2_user.user_id
+ group by team2_user.user_id
+having review_cnt >= 10
+ order by average_rating
+        , review_cnt desc
+</pre>
+</code>
+
+#### 결과
+<img src=./images/add_01.png>
+
+### 최고 불만고객의 리뷰들
+
+#### SQL
+<pre>
+<code>
+%sql
+
+select stars, 
+       text 
+from team2_review
+where user_id = "boVYlNwPXT7xTGCotNtUjw"
+</pre>
+</code>
+
+#### 결과
+<img src=./images/add_02.png>
+
+
+### 주요 칭찬고객 식별
+
+#### SQL
+<pre>
+<code>
+select team2_user.user_id
+     , avg(stars) as average_rating
+     , count(*) as review_cnt
+  from team2_review
+  join team2_user
+    on team2_review.user_id = team2_user.user_id
+ group by team2_user.user_id
+having review_cnt >= 10
+ order by average_rating desc
+        , review_cnt desc
+</pre>
+</code>
+
+#### 결과
+<img src=./images/add_03.png>
+
+### 최고 칭찬고객의 리뷰들
+
+#### SQL
+<pre>
+<code>
+%sql
+select stars, 
+       text 
+from team2_review 
+where user_id = "8JwSmvviX2dEAgaPRZ70nQ"
+</pre>
+</code>
+
+#### 결과
+<img src=./images/add_04.png>
+
+### 결론
+<pre>
+<code>
+리뷰의 별점을 바탕으로 고객의 리뷰 성향을 구분할 수 있다. 
+</pre>
+</code>
+
+
+### 2. 리뷰 수와 별점의 관계 분석
+### 리뷰가 많다고 좋은 레스토랑인지에 대한 검증을 위해서 과제 선택.
+
+#### SQL
+<pre>
+<code>
+select corr(review_count, stars) as corr 
+from team2_business
+</pre>
+</code>
+
+#### 결과
+<img src=./images/add_05.png>
+
+### 결론
+<pre>
+<code>
+리뷰가 많다고 꼭 별점이 높은 것은 아니다. (상관관계 0.03)
+</pre>
+</code>
