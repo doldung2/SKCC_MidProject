@@ -20,6 +20,7 @@ from team2_business;
 <pre>
 <code>
 %sql
+
 with topcity_df (
 select city, 
        explode(categories) as category 
@@ -47,6 +48,7 @@ limit 10
 <pre>
 <code>
 %sql
+
 with category_df (
 select explode(categories) as category 
 from team2_business 
@@ -67,3 +69,120 @@ limit 15
 
 ### 3.3 Chart
 <img src=./images/mid_03_02.png>
+
+
+
+## 4. What ratings do the majority of restaurants have?
+### 4.1 SQL
+<pre>
+<code>
+%sql
+
+select stars
+     , count(*) as cnt
+  from team2_business
+ where array_contains(categories, "Restaurants")
+ group by stars 
+ order by cnt desc
+</code>
+</prd>
+
+### 4.2 DATA
+<img src=./images/mid_04_01.png>
+
+### 4.3 Chart
+<img src=./images/mid_04_04.png>
+
+
+
+## 5. What is rating distribution in the restaurant reviews?
+### 5.1 SQL
+<pre>
+<code>
+%sql
+
+select team2_review.stars
+     , count(*) as cnt
+  from team2_business
+  join team2_review
+    on team2_business.business_id = team2_review.business_id
+ where array_contains(team2_business.categories, "Restaurants")
+ group by team2_review.stars
+ order by team2_review.star
+</code>
+</prd>
+
+### 5.2 DATA
+<img src=./images/mid_05_01.png>
+
+### 5.3 Chart
+<img src=./images/mid_05_02.png>
+
+
+
+## 6. Which type of restaurants get good reviews? How about bad reviews? This will depend on what you consider a good rating. Above 4 star perhaps? You choose. Similarly, for bad reviews. What would be considered a bad review?
+### 6.1 SQL
+<pre>
+<code>
+
+</code>
+</prd>
+
+### 6.2 DATA
+
+### 6.3 Chart
+
+
+
+## 7. Which restaurants have the most reviews?
+### 7.1 SQL
+<pre>
+<code>
+%sql
+
+select team2_business.name
+     , count(*) as cnt
+     , round(avg(team2_review.stars),2) as average_stars
+  from team2_business
+  join team2_review
+    on team2_business.business_id = team2_review.business_id
+ where array_contains(team2_business.categories, "Restaurants")
+ group by team2_business.name
+ order by cnt desc
+ limit 1
+</code>
+</prd>
+
+### 7.2 DATA
+<img src=./images/mid_07_01.png>
+
+### 7.3 Chart
+<img src=./images/mid_07_02.png>
+
+
+
+## 8. What number of yelp users are elite users? Do they rate differently than non-elite users?
+### 8.1 SQL
+<pre>
+<code>
+%sql
+
+select team2_business.name
+     , count(*) as cnt
+     , round(avg(team2_review.stars),2) as average_stars
+  from team2_business
+  join team2_review
+    on team2_business.business_id = team2_review.business_id
+ where array_contains(team2_business.categories, "Restaurants")
+ group by team2_business.name
+ order by cnt desc
+ limit 1
+</code>
+</prd>
+
+### 8.2 DATA
+<img src=./images/mid_08_01.png>
+
+### 8.3 Chart
+<img src=./images/mid_08_02.png>
+
