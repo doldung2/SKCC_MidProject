@@ -124,7 +124,22 @@ select team2_review.stars
 #### 6.1.1 SQL
 <pre>
 <code>
+%sql
 
+
+with category_df (
+select business_id, explode(categories) as category from team2_business where array_contains(categories, "Restaurants")
+)
+select category_df.category
+     , round(avg(team2_review.stars),2) as average_rating
+     , count(team2_review.stars) as review_cnt
+  from category_df
+  join team2_review
+    on category_df.business_id = team2_review.business_id
+ where category_df.category != "Restaurants"
+ group by category_df.category
+having average_rating >= 4
+ order by average_rating desc
 </code>
 </pre>
 
@@ -132,25 +147,29 @@ select team2_review.stars
 
 #### 6.1.3 Chart
 
-### 6.2 How about bad reviews? This will depend on what you consider a good rating. Above 4 star perhaps? You choose. Similarly, for bad reviews.
+### 6.2 What would be considered a bad review?
 #### 6.2.1 SQL
 <pre>
 <code>
+%sql
 
+with category_df (
+select business_id, explode(categories) as category from team2_business where array_contains(categories, "Restaurants")
+)
+select category_df.category
+     , round(avg(team2_review.stars),2) as average_rating
+     , count(team2_review.stars) as review_cnt
+  from category_df
+  join team2_review
+    on category_df.business_id = team2_review.business_id
+ where category_df.category != "Restaurants"
+ group by category_df.category
+having average_rating <= 2
+ order by average_rating
 </code>
 </pre>
 #### 6.2.2 DATA
-#### 6.1.3 Chart
-
-### 6.3 What would be considered a bad review?
-#### 6.3.1 SQL
-<pre>
-<code>
-
-</code>
-</pre>
-#### 6.3.2 DATA
-#### 6.3.3 Chart
+#### 6.2.3 Chart
 
 
 
