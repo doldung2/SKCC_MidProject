@@ -297,4 +297,39 @@ group by isEliteUser
 #### 8.2.3 Chart
 <img src=./images/mid_08_04.png>
 
+### 각 business_Id별 elite와 non-elite간의 차이는 단순 차이보다 클거라는 가정으로 추가로 분석을 해본 결과 21%(0.21)로 단순 비교한 결과 8%(0.08)보다 큰 차이가 나는 것을 확인 할 수 있었습니다.
+#### SQL
+<pre>
+<code>
+%sql
+with aa as (
+select case when size(team2_user.elite) > 0 then 'elite' else 'non-elite' end as isEliteUser
+      ,team2_review.business_Id
+      ,team2_review.stars
+from team2_user
+join team2_review
+on team2_user.user_id = team2_review.user_id 
+--group by isEliteUser ,business_Id
+), bb as (
+select isEliteUser
+      ,business_Id
+      ,round(avg(stars),2) as avgStars
+from   aa
+where  isEliteUser = 'non-elite'
+group by isEliteUser ,business_Id
+), cc as (
+select isEliteUser
+      ,business_Id
+      ,round(avg(stars),2) as avgStars
+from   aa
+where  isEliteUser = 'elite'
+group by isEliteUser ,business_Id
+)
+select round(avg(bb.avgStars - cc.avgStars),2) as gapStars
+from   bb
+      ,cc
+where  bb.business_Id = cc.business_Id
+</code>
+</pre>
+
 
