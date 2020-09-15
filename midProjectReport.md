@@ -121,16 +121,37 @@ select team2_review.stars
 
 
 ## 6. Which type of restaurants get good reviews? How about bad reviews? This will depend on what you consider a good rating. Above 4 star perhaps? You choose. Similarly, for bad reviews. What would be considered a bad review?
-### 6.1 SQL
+### 6.1 Which type of restaurants get good reviews?
+#### 6.1.1 SQL
 <pre>
 <code>
 
 </code>
 </pre>
 
-### 6.2 DATA
+#### 6.1.2 DATA
 
-### 6.3 Chart
+#### 6.1.3 Chart
+
+### 6.2 How about bad reviews? This will depend on what you consider a good rating. Above 4 star perhaps? You choose. Similarly, for bad reviews.
+#### 6.2.1 SQL
+<pre>
+<code>
+
+</code>
+</pre>
+#### 6.2.2 DATA
+#### 6.1.3 Chart
+
+### 6.3 What would be considered a bad review?
+#### 6.3.1 SQL
+<pre>
+<code>
+
+</code>
+</pre>
+#### 6.3.2 DATA
+#### 6.3.3 Chart
 
 
 
@@ -154,35 +175,45 @@ select team2_business.name
 </pre>
 
 ### 7.2 DATA
-<img src=./images/mid_07_01.png>
-
-### 7.3 Chart
-<img src=./images/mid_07_02.png>
+<img src=./images/mid_07.png>
 
 
 
 ## 8. What number of yelp users are elite users? Do they rate differently than non-elite users?
-### 8.1 SQL
+### 8.1 What number of yelp users are elite users?
+#### 8.1.1 SQL
 <pre>
 <code>
 %sql
-
-select team2_business.name
-     , count(*) as cnt
-     , round(avg(team2_review.stars),2) as average_stars
-  from team2_business
-  join team2_review
-    on team2_business.business_id = team2_review.business_id
- where array_contains(team2_business.categories, "Restaurants")
- group by team2_business.name
- order by cnt desc
- limit 1
+select case when size(elite) > 0 then 'elite' else 'non-elite' end as isEliteUser,
+       count(*) AS cnt
+from team2_user
+group by isEliteUser
 </code>
 </pre>
 
-### 8.2 DATA
+#### 8.1.2 DATA
 <img src=./images/mid_08_01.png>
 
-### 8.3 Chart
+#### 8.1.3 Chart
 <img src=./images/mid_08_02.png>
+
+### 8.2 Do they rate differently than non-elite users?
+#### 8.2.1 SQL
+<pre>
+<code>
+%sql
+select case when size(elite) > 0 then 'elite' else 'non-elite' end as isEliteUser,
+       count(*) AS cnt
+from team2_user
+group by isEliteUser
+</code>
+</pre>
+
+#### 8.2.2 DATA
+<img src=./images/mid_08_03.png>
+
+#### 8.2.3 Chart
+<img src=./images/mid_08_04.png>
+
 
