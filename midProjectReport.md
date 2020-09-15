@@ -91,7 +91,7 @@ select stars
 <img src=./images/mid_04_01.png>
 
 ### 4.3 Chart
-<img src=./images/mid_04_04.png>
+<img src=./images/mid_04_02.png>
 
 
 
@@ -100,7 +100,6 @@ select stars
 <pre>
 <code>
 %sql
-
 select team2_review.stars
      , count(*) as cnt
   from team2_business
@@ -108,7 +107,7 @@ select team2_review.stars
     on team2_business.business_id = team2_review.business_id
  where array_contains(team2_business.categories, "Restaurants")
  group by team2_review.stars
- order by team2_review.star
+ order by team2_review.stars
 </code>
 </pre>
 
@@ -203,10 +202,7 @@ group by isEliteUser
 <pre>
 <code>
 %sql
-select case when size(elite) > 0 then 'elite' else 'non-elite' end as isEliteUser,
-       count(*) AS cnt
-from team2_user
-group by isEliteUser
+
 </code>
 </pre>
 
