@@ -88,10 +88,10 @@ select stars
 </pre>
 
 ### 4.2 DATA
-<img src=./images/mid_04_01.png>
+<img src=./images/mid_04_01_re.png>
 
 ### 4.3 Chart
-<img src=./images/mid_04_02.png>
+<img src=./images/mid_04_02_re.png>
 
 
 
@@ -112,10 +112,10 @@ select team2_review.stars
 </pre>
 
 ### 5.2 DATA
-<img src=./images/mid_05_01.png>
+<img src=./images/mid_05_01_re.png>
 
 ### 5.3 Chart
-<img src=./images/mid_05_02.png>
+<img src=./images/mid_05_02_re.png>
 
 
 
