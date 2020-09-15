@@ -85,7 +85,7 @@ select stars
  group by stars 
  order by cnt desc
 </code>
-</prd>
+</pre>
 
 ### 4.2 DATA
 <img src=./images/mid_04_01.png>
@@ -110,7 +110,7 @@ select team2_review.stars
  group by team2_review.stars
  order by team2_review.star
 </code>
-</prd>
+</pre>
 
 ### 5.2 DATA
 <img src=./images/mid_05_01.png>
@@ -126,7 +126,7 @@ select team2_review.stars
 <code>
 
 </code>
-</prd>
+</pre>
 
 ### 6.2 DATA
 
@@ -151,7 +151,7 @@ select team2_business.name
  order by cnt desc
  limit 1
 </code>
-</prd>
+</pre>
 
 ### 7.2 DATA
 <img src=./images/mid_07_01.png>
@@ -178,7 +178,7 @@ select team2_business.name
  order by cnt desc
  limit 1
 </code>
-</prd>
+</pre>
 
 ### 8.2 DATA
 <img src=./images/mid_08_01.png>
