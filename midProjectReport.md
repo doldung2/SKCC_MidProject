@@ -222,6 +222,13 @@ group by isEliteUser
 <code>
 %sql
 
+select case when size(team2_user.elite) > 0 then 'elite' else 'non-elite' end as isEliteUser     
+     , round(avg(team2_review.stars), 2) as average_rating
+from team2_user
+join team2_review
+on team2_user.user_id = team2_review.user_id 
+group by isEliteUser
+
 </code>
 </pre>
 
