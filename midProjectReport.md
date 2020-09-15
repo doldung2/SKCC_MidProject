@@ -298,7 +298,7 @@ group by isEliteUser
 <img src=./images/mid_08_04.png>
 
 #### 8.2.4 추가확인
-#### 각 business_Id별 elite와 non-elite간의 차이는 단순 차이보다 클거라는 가정으로 추가로 분석을 해본 결과 21%(0.21)로 단순 비교한 결과 8%(0.08)보다 큰 차이가 나는 것을 확인 할 수 있었습니다.
+#### 각 business_Id별 elite와 non-elite간의 차이는 단순 차이보다 클거라는 가정으로 추가로 분석을 해본 결과 0.21로 단순 비교한 결과 0.08보다 큰 차이가 나는 것을 확인 할 수 있었습니다.
 #### SQL
 <pre>
 <code>
