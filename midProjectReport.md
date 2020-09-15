@@ -1,5 +1,7 @@
 # IntensiveCource Mid Project Report(Team2)
 ## 1. Map of restaurants across the United States
+### Hue에서 제공하는 Map Marker 기능을 이용하여, 위경도 정보를 바탕으로 지도에 표시되도록 함.
+
 ### 1.1 SQL
 <pre>
 <code>
@@ -16,6 +18,8 @@ from team2_business;
 
 
 ## 2. Which cities have the highest number of restaurants?
+### city값을 기준으로 group by 후 count필드를 기준으로 descending 정렬함.
+
 ### 2.1 SQL
 <pre>
 <code>
@@ -44,6 +48,8 @@ limit 10
 
 
 ## 3. Which are the top 15 subcategories in Restaurants?
+## 앞선 2번과 동일하게 처리하되 추가로 limit 15 조건 추하여 15개만 추출함.
+
 ### 3.1 SQL
 <pre>
 <code>
@@ -73,6 +79,8 @@ limit 15
 
 
 ## 4. What ratings do the majority of restaurants have?
+## categories에 Restaurants 값을 포함하는 데이터만 추출하여 stars를 기준으로 group by 함. 
+
 ### 4.1 SQL
 <pre>
 <code>
@@ -96,6 +104,8 @@ select stars
 
 
 ## 5. What is rating distribution in the restaurant reviews?
+## business테이블과 review테이블을 join하여, review테이블의 stars를 기준으로 group by 및 오름차순 정렬 수행.
+
 ### 5.1 SQL
 <pre>
 <code>
@@ -120,6 +130,9 @@ select team2_review.stars
 
 
 ## 6. Which type of restaurants get good reviews? How about bad reviews? This will depend on what you consider a good rating. Above 4 star perhaps? You choose. Similarly, for bad reviews. What would be considered a bad review?
+## star를 기준으로 추출할 경우 상위/하위의 star가 불균형 적이어서 다른 방법을 찾기로 결정.
+## 최종 선정한 하위 카테고리의 개수가 148개이고, 이에 대한 10%에 해당하는 15개를 기준으로 상위 15개를 좋은 유형, 하위 15개를 하위 유형으로 함.
+
 ### 6.1 Which type of restaurants get good reviews?
 #### 6.1.1 SQL
 <pre>
@@ -137,9 +150,23 @@ select category_df.category
   join team2_review
     on category_df.business_id = team2_review.business_id
  where category_df.category != "Restaurants"
+   and category in (
+   "Afghan","African","Senegalese","South African","American (New)","American (Traditional)","Arabian","Argentine","Armenian","Asian Fusion","Australian","Austrian",
+   "Bangladeshi","Barbeque","Basque","Belgian","Brasseries","Brazilian","Breakfast & Brunch","Pancakes","British","Buffets","Bulgarian","Burgers","Burmese",
+   "Cafes","Themed Cafes","Cafeteria","Cajun/Creole","Cambodian","Caribbean","Dominican","Haitian","Puerto Rican","Trinidadian","Catalan","Cheesesteaks","Chicken Shop",
+   "Chicken Wings","Chinese","Cantonese","Dim Sum","Hainan","Shanghainese","Szechuan","Comfort Food","Creperies","Cuban","Czech","Delis","Diners","Dinner Theater","Eritrean","Ethiopian",
+   "Fast Food","Filipino","FishChips","Fondue","Food Court","Food Stands","French","Mauritius","Reunion","Game Meat","Gastropubs","Georgian","German",
+   "Gluten-Free","Greek","Guamanian","Halal","Hawaiian","Himalayan/Nepalese","Honduran","Hong Kong Style Cafe","Hot Dogs","Hot Pot","Hungarian",
+   "Iberian","Indian","Indonesian","Irish","Italian","Calabrian","Sardinian","Sicilian","Tuscan","Japanese","Conveyor Belt Sushi","Izakaya","Japanese Curry",
+   "Ramen","Teppanyaki","Kebab","Korean","Kosher","Laotian","Latin American","Colombian","Salvadoran","Venezuelan","Live/Raw Food","Malaysian","Mediterranean",
+   "Falafel","Mexican","Tacos","Middle Eastern","Egyptian","Lebanese","Modern European","Mongolian","Moroccan","New Mexican Cuisine","Nicaraguan","Noodles","Pakistani","Pan Asia",
+   "Persian/Iranian","Peruvian","Pizza","Polish","Polynesian","Pop-Up Restaurants","Portuguese","Poutineries","Russian","Salad","Sandwiches","Scandinavian","Scottish","Seafood","Singaporean",
+   "Slovakian","Somali","Soul Food","Soup","Southern","Spanish","Sri Lankan","Steakhouses","Supper Clubs","Sushi Bars","Syrian","Taiwanese","Tapas Bars","Tapas/Small Plates",
+   "Tex-Mex","Thai","Turkish","Ukrainian","Uzbek","Vegan","Vegetarian","Vietnamese","Waffles","Wraps"
+   )
  group by category_df.category
-having average_rating >= 4
  order by average_rating desc
+ limit 15
 </code>
 </pre>
 
@@ -153,6 +180,7 @@ having average_rating >= 4
 <code>
 %sql
 
+
 with category_df (
 select business_id, explode(categories) as category from team2_business where array_contains(categories, "Restaurants")
 )
@@ -163,9 +191,23 @@ select category_df.category
   join team2_review
     on category_df.business_id = team2_review.business_id
  where category_df.category != "Restaurants"
+   and category in (
+   "Afghan","African","Senegalese","South African","American (New)","American (Traditional)","Arabian","Argentine","Armenian","Asian Fusion","Australian","Austrian",
+   "Bangladeshi","Barbeque","Basque","Belgian","Brasseries","Brazilian","Breakfast & Brunch","Pancakes","British","Buffets","Bulgarian","Burgers","Burmese",
+   "Cafes","Themed Cafes","Cafeteria","Cajun/Creole","Cambodian","Caribbean","Dominican","Haitian","Puerto Rican","Trinidadian","Catalan","Cheesesteaks","Chicken Shop",
+   "Chicken Wings","Chinese","Cantonese","Dim Sum","Hainan","Shanghainese","Szechuan","Comfort Food","Creperies","Cuban","Czech","Delis","Diners","Dinner Theater","Eritrean","Ethiopian",
+   "Fast Food","Filipino","FishChips","Fondue","Food Court","Food Stands","French","Mauritius","Reunion","Game Meat","Gastropubs","Georgian","German",
+   "Gluten-Free","Greek","Guamanian","Halal","Hawaiian","Himalayan/Nepalese","Honduran","Hong Kong Style Cafe","Hot Dogs","Hot Pot","Hungarian",
+   "Iberian","Indian","Indonesian","Irish","Italian","Calabrian","Sardinian","Sicilian","Tuscan","Japanese","Conveyor Belt Sushi","Izakaya","Japanese Curry",
+   "Ramen","Teppanyaki","Kebab","Korean","Kosher","Laotian","Latin American","Colombian","Salvadoran","Venezuelan","Live/Raw Food","Malaysian","Mediterranean",
+   "Falafel","Mexican","Tacos","Middle Eastern","Egyptian","Lebanese","Modern European","Mongolian","Moroccan","New Mexican Cuisine","Nicaraguan","Noodles","Pakistani","Pan Asia",
+   "Persian/Iranian","Peruvian","Pizza","Polish","Polynesian","Pop-Up Restaurants","Portuguese","Poutineries","Russian","Salad","Sandwiches","Scandinavian","Scottish","Seafood","Singaporean",
+   "Slovakian","Somali","Soul Food","Soup","Southern","Spanish","Sri Lankan","Steakhouses","Supper Clubs","Sushi Bars","Syrian","Taiwanese","Tapas Bars","Tapas/Small Plates",
+   "Tex-Mex","Thai","Turkish","Ukrainian","Uzbek","Vegan","Vegetarian","Vietnamese","Waffles","Wraps"
+   )
  group by category_df.category
-having average_rating <= 2
  order by average_rating
+ limit 15
 </code>
 </pre>
 #### 6.2.2 DATA
@@ -174,6 +216,8 @@ having average_rating <= 2
 
 
 ## 7. Which restaurants have the most reviews?
+## business 테이블과 review를 join하여 count가 가장 많은 1건을 추출함.
+
 ### 7.1 SQL
 <pre>
 <code>
@@ -198,6 +242,8 @@ select team2_business.name
 
 
 ## 8. What number of yelp users are elite users? Do they rate differently than non-elite users?
+## elite 필드이 년도가 하나라도 있는 경우와 아닌 경우를 구분하여 count 및 average 값을 구함.
+
 ### 8.1 What number of yelp users are elite users?
 #### 8.1.1 SQL
 <pre>
