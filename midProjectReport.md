@@ -48,7 +48,7 @@ limit 10
 
 
 ## 3. Which are the top 15 subcategories in Restaurants?
-## 앞선 2번과 동일하게 처리하되 추가로 limit 15 조건 추하여 15개만 추출함.
+### 앞선 2번과 동일하게 처리하되 추가로 limit 15 조건 추하여 15개만 추출함.
 
 ### 3.1 SQL
 <pre>
@@ -79,7 +79,7 @@ limit 15
 
 
 ## 4. What ratings do the majority of restaurants have?
-## categories에 Restaurants 값을 포함하는 데이터만 추출하여 stars를 기준으로 group by 함. 
+### categories에 Restaurants 값을 포함하는 데이터만 추출하여 stars를 기준으로 group by 함. 
 
 ### 4.1 SQL
 <pre>
@@ -104,7 +104,7 @@ select stars
 
 
 ## 5. What is rating distribution in the restaurant reviews?
-## business테이블과 review테이블을 join하여, review테이블의 stars를 기준으로 group by 및 오름차순 정렬 수행.
+### business테이블과 review테이블을 join하여, review테이블의 stars를 기준으로 group by 및 오름차순 정렬 수행.
 
 ### 5.1 SQL
 <pre>
@@ -130,8 +130,9 @@ select team2_review.stars
 
 
 ## 6. Which type of restaurants get good reviews? How about bad reviews? This will depend on what you consider a good rating. Above 4 star perhaps? You choose. Similarly, for bad reviews. What would be considered a bad review?
-## star를 기준으로 추출할 경우 상위/하위의 star가 불균형 적이어서 다른 방법을 찾기로 결정.
-## 최종 선정한 하위 카테고리의 개수가 148개이고, 이에 대한 10%에 해당하는 15개를 기준으로 상위 15개를 좋은 유형, 하위 15개를 하위 유형으로 함.
+
+### star를 기준으로 추출할 경우 상위/하위의 star가 불균형 적이어서 다른 방법을 찾기로 결정.
+### 최종 선정한 하위 카테고리의 개수가 148개이고, 이에 대한 10%에 해당하는 15개를 기준으로 상위 15개를 좋은 유형, 하위 15개를 하위 유형으로 함.
 
 ### 6.1 Which type of restaurants get good reviews?
 #### 6.1.1 SQL
@@ -171,8 +172,10 @@ select category_df.category
 </pre>
 
 #### 6.1.2 DATA
+<img src=./images/mid_06_01.png>
 
 #### 6.1.3 Chart
+<img src=./images/mid_06_02.png>
 
 ### 6.2 What would be considered a bad review?
 #### 6.2.1 SQL
@@ -210,13 +213,17 @@ select category_df.category
  limit 15
 </code>
 </pre>
+
 #### 6.2.2 DATA
+<img src=./images/mid_06_03.png>
+
 #### 6.2.3 Chart
+<img src=./images/mid_06_04.png>
 
 
 
 ## 7. Which restaurants have the most reviews?
-## business 테이블과 review를 join하여 count가 가장 많은 1건을 추출함.
+### business 테이블과 review를 join하여 count가 가장 많은 1건을 추출함.
 
 ### 7.1 SQL
 <pre>
@@ -242,7 +249,7 @@ select team2_business.name
 
 
 ## 8. What number of yelp users are elite users? Do they rate differently than non-elite users?
-## elite 필드이 년도가 하나라도 있는 경우와 아닌 경우를 구분하여 count 및 average 값을 구함.
+### elite 필드이 년도가 하나라도 있는 경우와 아닌 경우를 구분하여 count 및 average 값을 구함.
 
 ### 8.1 What number of yelp users are elite users?
 #### 8.1.1 SQL
