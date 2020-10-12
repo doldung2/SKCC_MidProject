@@ -8,7 +8,7 @@ sudo yum install -y bind-utils
 1. swappiness 
 sudo vi /etc/sysctl.conf
 
-sudo -w vm.swappiness=1
+sudo sysctl -w vm.swappiness=1
 
 
 2. df
