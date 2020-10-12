@@ -1,0 +1,40 @@
+/sys/kernel/mm/transparent_hugepage/enabled
+
+0.
+sudo yum update
+sudo yum install -y wget
+sudo yum install -y bind-utils
+
+1. swappiness 
+sudo vi /etc/sysctl.conf
+
+sudo -w vm.swappiness=1
+
+
+2. df
+  mount -l
+
+
+3.
+sudo cat /sys/kernel/mm/transparent_hugepage/enabled
+sudo sh -c "echo 'never'>/sys/kernel/mm/transparent_hugepage/enabled"
+
+sudo cat /sys/kernel/mm/transparent_hugepage/defrag
+sudo sh -c "echo 'never'>/sys/kernel/mm/transparent_hugepage/defrag"
+
+
+10.0.0.112 cm2.skcc2.com cm2
+10.0.0.241 nn2.skcc2.com nn2
+10.0.0.243 dn21.skcc2.com dn21
+10.0.0.181 dn22.skcc2.com dn22
+10.0.0.40 dn23.skcc2.com dn23
+
+7. sudo systemctl status nscd
+sudo yum install -y nscd
+sudo systemctl start nscd
+sudo systemctl enable nscd
+
+8. sudo systemctl status ntpd
+sudo yum install -y ntp
+sudo systemctl start ntpd
+sudo systemctl enable ntpd
