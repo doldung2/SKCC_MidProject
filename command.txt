@@ -23,11 +23,11 @@ sudo cat /sys/kernel/mm/transparent_hugepage/defrag
 sudo sh -c "echo 'never'>/sys/kernel/mm/transparent_hugepage/defrag"
 
 
-10.0.0.112 cm2.skcc2.com cm2
-10.0.0.241 nn2.skcc2.com nn2
-10.0.0.243 dn21.skcc2.com dn21
-10.0.0.181 dn22.skcc2.com dn22
-10.0.0.40 dn23.skcc2.com dn23
+10.0.0.15 cm2.skcc2.com cm2
+10.0.0.136 nn2.skcc2.com nn2
+10.0.0.140 dn21.skcc2.com dn21
+10.0.0.131 dn22.skcc2.com dn22
+10.0.0.132 dn23.skcc2.com dn23
 
 7. sudo systemctl status nscd
 sudo yum install -y nscd
