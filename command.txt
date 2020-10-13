@@ -1,4 +1,5 @@
 /sys/kernel/mm/transparent_hugepage/enabled
+https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html#license-lightbox
 
 0.
 sudo yum update
