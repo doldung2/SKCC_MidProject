@@ -1,13 +1,15 @@
 
 
-* 계정 정보 변경
+1. 계정 정보 변경 (모든 노드)
 1) passwd centos  =>  password: centos
 2) sudo vi /etc/ssh/sshd_config
    Modify ->
    PasswordAuthentication no   =>   PasswordAuthentication yes
 3) sudo systemctl restart sshd
 
-* /etc/hosts 수정
+
+
+2. /etc/hosts 수정 (모든 노드)
 1) sudo vi /etc/hosts
    add ->
    10.0.0.15 cm2.skcc2.com cm2
@@ -16,11 +18,11 @@
    10.0.0.131 dn22.skcc2.com dn22
    10.0.0.132 dn23.skcc2.com dn23
    
-* 재부팅
+3. 재부팅 (모든 노드)
 1) sudo reboot
    
 
-* JDK설치
+4. JDK설치 (모든 노드)
 1) JDK 수동 설치 후 각 노드로 파일 복사
 2) tar xvzf jdk-8u181-linux-x64.tar.gz -C /usr/java/
 3) sudo vi /etc/profile
@@ -31,11 +33,24 @@
 4) source /etc/profile
 
 
-* Configure the repository for CM 5.15.2
-1) xxx
+5. Configure the repository for CM 5.15.2 (모든 노드)
+1) sudo wget https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo -P /etc/yum.repos.d/
+   (우리가 놓친 사항)  sudo vi /etc/yum.repos.d/cloudera-manager.repo
+                   Modify -> baseurl=https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.2/
+2) sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
 
 
-*JDBC 설치
+6. Install Cloudera Manager
+1) sudo yum install cloudera-manager-daemons cloudera-manager-server (CM 노드만)
+2) sudo yum install cloudera-manager-daemons cloudera-manager-agent (CM 노드 포함, 모든 노드)
+3) sudo systemctl start cloudera-scm-agent (모든 노드)
+
+
+7. Install and enable Maria DB
+1) sudo yum install mariadb-server
+
+
+* JDBC 설치
 wget https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-java-5.1.46.tar.gz
 
 
