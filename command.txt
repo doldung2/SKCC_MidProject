@@ -1,5 +1,9 @@
 /sys/kernel/mm/transparent_hugepage/enabled
-https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html#license-lightbox
+
+
+https://www.oracle.com/webapps/redirect/signon?nexturl=https://download.oracle.com/otn/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz
+
+
 
 0.
 sudo yum update
