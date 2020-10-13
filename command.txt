@@ -1,7 +1,7 @@
 
 
 1. 계정 정보 변경 (모든 노드)
-1) passwd centos  =>  password: centos
+1) sudo passwd centos  =>  password: centos
 2) sudo vi /etc/ssh/sshd_config
    Modify ->
    PasswordAuthentication no   =>   PasswordAuthentication yes
