@@ -38,3 +38,8 @@ sudo systemctl enable nscd
 sudo yum install -y ntp
 sudo systemctl start ntpd
 sudo systemctl enable ntpd
+
+9. repo location & install jdk
+sudo wget https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo -P /etc/yum.repos.d/
+sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+sudo yum install -y oracle-j2sdk1.7
