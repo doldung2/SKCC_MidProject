@@ -1,9 +1,17 @@
-/sys/kernel/mm/transparent_hugepage/enabled
 
-export JAVA_HOME=/usr/java/jdk1.8.0_181
-export PATH=$JAVA_HOME/bin:$PATH
-export CLASSPATH=$CLASSPATH:$JAVA_HOME/jre/lib/ext:$JAVA_HOME/lib/tools.jar
 
+* 
+
+
+* JDK설치
+1) JDK수동설치 후 각 노드로 파일 복사
+2) tar xvzf jdk-8u181-linux-x64.tar.gz -C /usr/java/
+3) sudo vi /etc/profile
+  add =>
+    export JAVA_HOME=/usr/java/jdk1.8.0_181
+    export PATH=$JAVA_HOME/bin:$PATH
+    export CLASSPATH=$CLASSPATH:$JAVA_HOME/jre/lib/ext:$JAVA_HOME/lib/tools.jar
+4) source /etc/profile
 
 
 0.
